@@ -91,11 +91,14 @@ class Dashboard extends Component {
     }
 }  
 
+
+const mapStateToProps = (state) => {
+  return {
+    projects: state.firestore.ordered.projects
+  };
+};
+
 export default compose(
-    firestoreConnect(() => { collection: 'projects' }),
-    connect((state, props) => ({
-        projects: state.firestore.ordered.projects
-    }))
-
-
-)(Dashboard)
+  connect(mapStateToProps),
+  firestoreConnect([{ collection: "projects" }])
+)(Dashboard);
